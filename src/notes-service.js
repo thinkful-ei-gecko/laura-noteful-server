@@ -1,4 +1,4 @@
-const RosterService = {
+const NotesService = {
   getAllNotes(knex) {
     return knex('notes')
       .select('*');
