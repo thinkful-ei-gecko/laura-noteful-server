@@ -23,12 +23,13 @@ foldersRouter
   })
   .post(jsonParser, (req, res, next) => {
     const {folder_name} = req.body;
+    const newFolder = { folder_name };
 
-    if (folder_name == null) {
+    if (newFolder == null) {
       return res.status(400).json({ error: { message: `Request body must include folder_name `}});
     }
-    FoldersService.addFolder(req.app.get('db'), folder_name)
-      .then(folder => {
+    FoldersService.addFolder(req.app.get('db'), newFolder)
+    .then(folder => {
         res.status(201)
           .location(path.posix.join(req.originalUrl +`/${folder.id}`))
           .json(folderFormat(folder))
@@ -60,11 +61,12 @@ foldersRouter.route('/:id')
   })
   .patch(jsonParser, (req, res, next) => {
     const { folder_name } = req.body;
+    const folderToUpdate = { folder_name };
 
-    if(!folder_name) {
+    if(!folderToUpdate) {
       return res.status(400).json({ error: {message: `Update request must include: folder_name`} })
     }
-    FoldersService.updateFolder(req.app.get('db'), req.params.id, folder_name)
+    FoldersService.updateFolder(req.app.get('db'), req.params.id, folderToUpdate)
       .then((folder) => { res.status(200).json(folderFormat(folder)) })
       .catch(next)
   })
