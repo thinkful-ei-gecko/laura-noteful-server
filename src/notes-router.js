@@ -11,7 +11,8 @@ const noteFormat = note => ({
   id: note.id,
   folder_id: note.folder_id,
   note_title: xss(note.note_title),
-  note_content: xss(note.note_content)
+  note_content: xss(note.note_content),
+  modified: note.date_modified
 });
 
 notesRouter
