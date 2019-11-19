@@ -33,6 +33,7 @@ foldersRouter
         res.status(201)
           .location(path.posix.join(req.originalUrl +`/${folder.id}`))
           .json(folderFormat(folder))
+        console.log(folder);
       })
       .catch(next)
   })
